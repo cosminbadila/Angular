@@ -2,12 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "ignoreDeprecations":"5.0",
+    "suppressImplicitAnyIndexErrors": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
@@ -16,11 +16,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "useDefineForClassFields": false,
+    "target": "es2017",
+    "module": "es2020",
     "lib": [
-      "ES2022",
+      "es2018",
       "dom"
     ]
   },

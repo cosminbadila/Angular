@@ -1,1 +1,81 @@
-<p>admin works!</p>
+<div class="container">
+
+    <h1>Adaugare / Editare user</h1>
+
+    <form #f="ngForm" novalidate>
+        <div class="form-group">
+            <label for="nume">Nume</label>
+            <input [(ngModel)]="selectedUser.nume" #nume="ngModel" type="text" class="form-control" name="nume"
+                id="nume" aria-describedby="numeHelp" placeholder="nume" required minlength="3" maxlength="250"
+                pattern="^[a-zA-Z-]+$" [class.is-invalid]="nume.invalid &&(nume.dirty || nume.touched)">
+            <small *ngIf="nume.valid" id="numeHelp" class="form-text text-muted">We'll never share your name with anyone
+                else.</small>
+            <div *ngIf="nume.invalid &&(nume.dirty || nume.touched)" class="invalid-feedback"></div>
+            <div *ngIf="nume.errors?.['required']">
+                Acest camp este obligatoriu
+            </div>
+            <div *ngIf="nume.errors?.['minlength']">
+                Acest camp trebuie sa fie de minim 3 caractere
+            </div>
+            <div *ngIf="nume.errors?.['maxlength']">
+                Acest camp trebuie sa fie de maxim 250 caractere
+            </div>
+            <div *ngIf="nume.errors?.['pattern']">
+                Acest camp trebuie sa contina doar caractere si -
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Prenume</label>
+            <input [(ngModel)]="selectedUser.prenume" name="prenume" type="text" class="form-control" id="prenume"
+                aria-describedby="prenumeHealp" required minlength="1" maxlength="250">
+            <small id="prenumeHealp" class="form-text text-muted">Acest camp este obligatoriu</small>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input [(ngModel)]="selectedUser.email" name="email" type="email" class="form-control" id="email"
+                aria-describedby="emailHealp">
+            <small id="emailHealp" class="form-text text-muted">Acest camp este obligatoriu</small>
+        </div>
+        <div class="form-group">
+            <label for="telefon">Telefon</label>
+            <input [(ngModel)]="selectedUser.telefon" name="telefon" type="text" class="form-control" id="telefon"
+                aria-describedby="telefonHealp">
+            <small id="telefonHealp" class="form-text text-muted">Acest camp este obligatoriu</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">An</label>
+            <input [(ngModel)]="selectedUser.datanasterii" name="datanastere" type="date" class="form-control" id="an"
+                aria-describedby="anHealp">
+            <small id="anHealp" class="form-text text-muted">Format:2022-01-01</small>
+        </div>
+        <input [(ngModel)]="selectedUser.id" name="id" type="hidden" class="form-control" id="id"><br>
+
+        <button (click)="createOrUpdateUser(f)" type="submit" class="btn btn-primary">Create or Update User</button>
+    </form>
+
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nume</th>
+            <th scope="col">Prenume</th>
+            <th scope="col">Email</th>
+            <th scope="col">Operatii</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users" [attr.id]="user.id">
+            <td>{{ user.id }}</td>
+            <td>{{ user.nume }}</td>
+            <td>{{ user.prenume }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="deleteUser(user.id)">Delete</button>
+                <button type="button" class="btn btn-danger" (click)="selectUser(user)">Update</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
